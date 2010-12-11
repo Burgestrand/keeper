@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
@@ -8,36 +7,25 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'rake'
-
+require 'yard'
 require 'jeweler'
-Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "keeper"
-  gem.homepage = "http://github.com/Burgestrand/keeper"
-  gem.license = "MIT"
-  gem.summary = %Q{A thread-safe blocking event pattern for your pleasure.}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "kim@burgestrand.se"
-  gem.authors = ["Kim Burgestrand"]
-  # Include your dependencies below. Runtime dependencies are required when using your gem,
-  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
-  #  gem.add_development_dependency 'rspec', '> 1.2.3'
-end
-Jeweler::RubygemsDotOrgTasks.new
-
-require 'rspec/core'
 require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = FileList['spec/**/*_spec.rb']
+require './lib/keeper/version'
+
+Jeweler::Tasks.new do |gem|
+  gem.name     = "keeper"
+  gem.homepage = "http://github.com/Burgestrand/keeper"
+  gem.license  = "X11"
+               
+  gem.summary  = %Q{A thread-safe blocking event pattern for your pleasure.}
+  gem.authors  = ["Kim Burgestrand"]
+  gem.email    = "kim@burgestrand.se"
+  
+  gem.version  = Keeper::Version::STRING
 end
 
-RSpec::Core::RakeTask.new(:rcov) do |spec|
-  spec.pattern = 'spec/**/*_spec.rb'
-  spec.rcov = true
-end
+Jeweler::RubygemsDotOrgTasks.new
+YARD::Rake::YardocTask.new
+RSpec::Core::RakeTask.new
 
 task :default => :spec
-
-require 'yard'
-YARD::Rake::YardocTask.new
