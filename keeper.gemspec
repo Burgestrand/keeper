@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.markdown",
     "Rakefile",
+    "keeper.gemspec",
     "lib/keeper.rb",
     "lib/keeper/version.rb",
     "spec/keeper_spec.rb",
