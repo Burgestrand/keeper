@@ -1,10 +1,19 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Keeper" do
+  before :each do
+    @keeper = Keeper::Keeper.new
+    ConditionVariable.stub(:new => @condvar = mock)
+  end
+  
   describe "#wait_for" do
     context "new event" do
-      it "should create the event signaller"
-      it "should register the calling thread as waiting"
+      it "should create the event and wait for it" do
+        @condvar.should_receive(:wait)
+        @keeper.waiting.should == []
+        @keeper.wait_for(:event)
+        @keeper.waiting.should == [:event]
+      end
     end
     
     context "existing event" do
